@@ -1,6 +1,8 @@
 const Vue = require('vue');
 const server = require('express')();
-const renderer = require('vue-server-renderer').createRenderer();
+const renderer = require('vue-server-renderer').createRenderer({
+	template: require('fs').readFileSync('./index.template.html', 'utf-8')
+});
 
 server.get('*', (req, res) => {
 	const app = new Vue({
@@ -10,19 +12,16 @@ server.get('*', (req, res) => {
 		template: '<div>The visited URL is: {{url}}</div>'
 	})
 
-	renderer.renderToString(app, (err, html) => {
+	const context = {
+		title: 'hello'
+	}
+	renderer.renderToString(app, context, (err, html) => {
 		if (err) {
 			res.status(500).end('Internal Server Error');
 			return;
 		}
 
-		res.end(`
-	      <!DOCTYPE html>
-	      <html lang="en">
-	        <head><title>Hello</title></head>
-	        <body>${html}</body>
-	      </html>
-	    `)
+		res.end(html)
 	})
 })
 
