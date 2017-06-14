@@ -1,0 +1,24 @@
+{
+  "name": "vue-ssr",
+  "version": "1.0.0",
+  "description": "test ssr for vue",
+  "main": "index.js",
+  "scripts": {
+    "server": "cross-env VUE_ENV=server nodemon --watch . --ext js,html server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ssr"
+  ],
+  "author": "lulutia",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "vue": "^2.3.4",
+    "vue-server-renderer": "^2.3.4"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1",
+    "nodemon": "^1.11.0"
+  }
+}
